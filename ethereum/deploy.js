@@ -4,7 +4,7 @@ const { interface, bytecode } = require("./compile");
 
 const provider = new HDwalletprovider(
   "march box art maid curtain empty above security wave adapt yellow scout",
-  "https://rinkeby.infura.io/v3/2ae324fcb0d94486b6b022f559475dc7"
+  "https://ropsten.infura.io/v3/2ae324fcb0d94486b6b022f559475dc7"
 );
 
 const web3 = new Web3(provider);
