@@ -2,7 +2,7 @@ pragma solidity ^0.4.17;
 contract RecordFactory{
     address[] deployedrecords;
 
-    function createRecord(){
+    function createRecord() public{
         address newRecord = new healthrecord(msg.sender);
         deployedrecords.push(newRecord);
     }
