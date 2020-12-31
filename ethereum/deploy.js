@@ -16,10 +16,11 @@ const deploy = async () => {
     JSON.parse(compiledFactory.interface)
   )
     .deploy({ data: compiledFactory.bytecode, arguments: [] })
-    .send({ gas: "1000000", from: accounts[0] });
+    .send({ from: accounts[0], gas: "2572703" });
 
   console.log("contract deployed to", result.options.address);
 };
 deploy();
 
-//contract address 0x29d621036a3337C85e97a792E2D3CD4689D3813f
+//contract address 0x239Bbf21048aB6E98e2E783911e30344d6F7644f
+//1382583
