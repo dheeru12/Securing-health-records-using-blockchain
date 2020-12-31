@@ -49,11 +49,14 @@ class newRecord extends Component {
       await factory.methods
         .createRecord()
         .send({ from: this.state.account, gas: "1000000" });
+      //console.log("adding to ipfs");
       const result = await ipfs.add(this.state.buffer);
+      //console.log("added");
       this.setState({ loading: false });
       console.log(result.path);
       Router.pushRoute("/");
     } catch (err) {
+      console.log(err.message);
       this.setState({ errorMessage: err.message });
     }
     //console.log(this.state.buffer);
