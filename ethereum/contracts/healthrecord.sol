@@ -1,8 +1,8 @@
 pragma solidity ^0.4.17;
 contract RecordFactory{
-    address[] deployedrecords;
-    mapping(address=>bool) records;
-    address manager;
+    address[] public deployedrecords;
+    mapping(address=>bool) public records;
+    address public manager ;
     
     struct Doctor{
         address doc;
@@ -12,7 +12,7 @@ contract RecordFactory{
         
     }
     
-    function RecordFactory() public{
+    function RecordFactory() public {
         manager=msg.sender;
     }
     
@@ -20,16 +20,13 @@ contract RecordFactory{
     
     address[] public doctors;
 
-    function createRecord(string name,string age,string gender,string height,string weight,address doctorAddress,string prescriptionHash,string mriHash,string xrayHash,string imageHash) public {
+    function createRecord(string name,string age,string gender,string height,string weight,address doctorAddress,string prescriptionHash,string mriHash,string imageHash) public {
         require(!records[msg.sender]);
         healthrecord newRecord = new healthrecord(msg.sender,name,age,gender,height,weight,doctorAddress,imageHash);
         records[msg.sender]=true;
         deployedrecords.push(address(newRecord));
         if(bytes(mriHash).length!=0){
-            newRecord.setmriHash(doctorAddress,mriHash);
-        }
-        if(bytes(xrayHash).length!=0){
-            newRecord.setxrayHash(doctorAddress,xrayHash);
+            newRecord.setreportHash(doctorAddress,mriHash);
         }
         if(bytes(prescriptionHash).length!=0){
             newRecord.setPrescriptionHash(doctorAddress,prescriptionHash);
@@ -48,8 +45,8 @@ contract RecordFactory{
             speciality:_speciality,
             description:_description
         });
-        docs[msg.sender]=doc;
-        doctors.push(msg.sender);
+        docs[sender]=doc;
+        doctors.push(sender);
     }
     
     function getDoctors() public view returns(address[]){
@@ -59,8 +56,7 @@ contract RecordFactory{
 
 contract healthrecord{
     string[] private prescriptionHash;
-    string[] private xrayHash;
-    string[] private mriHash;
+    string[] private reportHash;
     string private profileHash;
     address private manager;
     address private doctor;
@@ -91,14 +87,13 @@ contract healthrecord{
         prescriptionHash.push(hash);
     }
     
-    function setxrayHash(address sender,string hash) public{
+    function setreportHash(address sender,string hash) public{
         require(sender==doctor);
-        xrayHash.push(hash);
+        reportHash.push(hash);
     }
     
-    function setmriHash(address sender,string hash) public{
-        require(sender==doctor);
-        mriHash.push(hash);
+    function getNameandAddress() public view returns(string,string,address,address){
+        return (name,profileHash,manager,doctor);
     }
     
     function getDetails() restricted public view returns(string,string,string,string,string){
@@ -113,20 +108,13 @@ contract healthrecord{
         return prescriptionHash.length;
     }
     
-    function getMri(uint index) restricted public view returns(string){
-        return mriHash[index];
+    
+    function getReport(uint index) restricted public view returns(string){
+        return reportHash[index];
     }
     
-    function getMriLength() restricted public view returns(uint){
-        return mriHash.length;
-    }
-    
-    function getXray(uint index) restricted public view returns(string){
-        return xrayHash[index];
-    }
-    
-    function getXrayLength() restricted public view returns(uint){
-        return xrayHash.length;
+    function getReportLength() restricted public view returns(uint){
+        return reportHash.length;
     }
 
 }
