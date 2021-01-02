@@ -14,18 +14,19 @@ class doctor extends Component {
   async componentDidMount() {
     const accounts = await web3.eth.getAccounts();
     const docs = await factory.methods.getDoctors().call({ from: accounts[0] });
+    console.log(docs);
     const items = [];
-    for (var i = 0; i < docs.length; i++) {
+    for (var i = 0; i < docs.length; i += 1) {
       const eachRecord = await factory.methods.docs(docs[i]).call();
       items.push({
         image: eachRecord.imageHash,
         header: eachRecord.description,
         description: eachRecord.speciality,
         extra: (
-          <Link route={`doctors/${eachRecord.doc}`}>
+          <Link route={`/doctors/${eachRecord.doc}`}>
             <a>
               <Icon name="user" />
-              select
+              Select
             </a>
           </Link>
         ),
