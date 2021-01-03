@@ -111,6 +111,7 @@ class newRecord extends Component {
       this.setState({ errorMessage: err.message });
     }
     this.setState({ loading: false });
+    Router.pushRoute("/all");
   };
 
   render() {
