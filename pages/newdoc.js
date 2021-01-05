@@ -20,7 +20,14 @@ class newDoc extends Component {
     buffer: null,
     loading: false,
     errorMessage: "",
+    account: "",
+    manageraddress: "",
   };
+  async componentDidMount() {
+    const accounts = await web3.eth.getAccounts();
+    const manageraddress = await factory.methods.manager().call();
+    this.setState({ account: accounts[0], manageraddress });
+  }
   captureFile = (event) => {
     event.preventDefault();
     const file = event.target.files[0];
@@ -54,6 +61,13 @@ class newDoc extends Component {
     Router.pushRoute("/doctors");
   };
   render() {
+    if (this.state.account != this.state.manageraddress) {
+      return (
+        <Layout>
+          <h1>Sorry this page can only be accesed by the manager</h1>
+        </Layout>
+      );
+    }
     return (
       <Layout>
         <h1>Register Doctor</h1>

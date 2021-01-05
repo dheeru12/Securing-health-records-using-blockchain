@@ -13,6 +13,9 @@ export default () => {
         </a>
       </Link>
       <Menu.Menu position="right">
+        <Link route="/newdoc">
+          <a className="item">Add doctor</a>
+        </Link>
         <Link route="/all">
           <a className="item">Records</a>
         </Link>

@@ -89,10 +89,20 @@ class newRecord extends Component {
       errorMessage: "",
     });
     try {
-      const resultPrescription = await ipfs.add(this.state.bufferPrescription);
-      const resultReport = await ipfs.add(this.state.bufferReport);
+      let resultPrescriptionLink = "";
+      if (this.state.bufferPrescription != null) {
+        const resultPrescription = await ipfs.add(
+          this.state.bufferPrescription
+        );
+        resultPrescriptionLink =
+          "https://ipfs.infura.io/ipfs/" + resultPrescription.path;
+      }
+      let resultReportLink = "";
+      if (this.state.bufferReport != null) {
+        const resultReport = await ipfs.add(this.state.bufferReport);
+        resultReportLink = "https://ipfs.infura.io/ipfs/" + resultReport.path;
+      }
       const imageHash = await ipfs.add(this.state.imageHash);
-      const link = "https://ipfs.infura.io/ipfs/";
       this.setState({ message: "added your files, creating your record" });
       await factory.methods
         .createRecord(
@@ -102,16 +112,16 @@ class newRecord extends Component {
           height,
           weight,
           doctorAddress,
-          link + resultPrescription.path,
-          link + resultReport.path,
-          link + imageHash.path
+          resultPrescriptionLink,
+          resultReportLink,
+          "https://ipfs.infura.io/ipfs/" + imageHash.path
         )
         .send({ from: this.state.account });
+      Router.pushRoute("/all");
     } catch (err) {
       this.setState({ errorMessage: err.message });
     }
     this.setState({ loading: false });
-    Router.pushRoute("/all");
   };
 
   render() {

@@ -1,6 +1,9 @@
-import React, { Component } from "react";
+import { execOnce } from "next/dist/next-server/lib/utils";
+import React from "react";
 import Layout from "../components/Layout";
-const index = () => {
+
+const fun = () => {
   return <Layout></Layout>;
 };
-export default index;
+
+export default fun;
