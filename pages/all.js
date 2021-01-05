@@ -47,17 +47,7 @@ class recordIndex extends Component {
   render() {
     return (
       <Layout>
-        <Link route="/doctors">
-          <a>
-            <Button
-              content="Create record"
-              floated="right"
-              icon="add circle"
-              primary
-            />
-          </a>
-        </Link>
-
+        <h1>All records!!</h1>
         {this.renderRecords()}
       </Layout>
     );
