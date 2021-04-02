@@ -4,6 +4,8 @@
   "description": "",
   "main": "./pages/index.js",
   "scripts": {
+    "build": "next build",
+    "heroku-postbuild": "npm run build",
     "test": "mocha",
     "dev": "node server.js",
     "start": "node server.js"
