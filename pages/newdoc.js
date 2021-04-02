@@ -80,6 +80,7 @@ class newDoc extends Component {
               onChange={(event) => {
                 this.setState({ name: event.target.value });
               }}
+              required
             />
             <Form.Input
               fluid
@@ -88,6 +89,7 @@ class newDoc extends Component {
               onChange={(event) => {
                 this.setState({ address: event.target.value });
               }}
+              required
             />
           </Form.Group>
 
@@ -97,8 +99,15 @@ class newDoc extends Component {
             onChange={(event) => {
               this.setState({ speciality: event.target.value });
             }}
+            required
           />
-          <Form.Input type="file" label="image" onChange={this.captureFile} />
+          <Form.Input
+            type="file"
+            label="image"
+            onChange={this.captureFile}
+            required
+            accept="image/png,image/jpeg"
+          />
           <Button primary type="submit" loading={this.state.loading}>
             <Icon name="add circle" />
             Register

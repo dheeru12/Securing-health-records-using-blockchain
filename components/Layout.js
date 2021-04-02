@@ -61,28 +61,26 @@ class Layout extends Component {
                 <Link route="/all">
                   <Menu.Item as="a">Records</Menu.Item>
                 </Link>
-                <Link route="/">
+                <Link route="/viewdoctors">
                   <Menu.Item as="a">Doctors</Menu.Item>
                 </Link>
-                <Link route="/">
-                  <Menu.Item as="a">About</Menu.Item>
-                </Link>
-                <Menu.Menu position="right">
-                  <Link route="/Records/doctors">
-                    <Menu.Item>
-                      <Button as="a" inverted={!fixed}>
-                        Create
-                      </Button>
-                    </Menu.Item>
+                <Menu.Item position="right">
+                  <Link route="/doctors">
+                    <Button as="a" inverted={!fixed}>
+                      Create
+                    </Button>
                   </Link>
                   <Link route="/newdoc">
-                    <Menu.Item>
-                      <Button as="a" inverted={!fixed} primary={fixed}>
-                        Register Doc
-                      </Button>
-                    </Menu.Item>
+                    <Button
+                      as="a"
+                      inverted={!fixed}
+                      primary={fixed}
+                      style={{ marginLeft: "0.5em" }}
+                    >
+                      Register Doctor
+                    </Button>
                   </Link>
-                </Menu.Menu>
+                </Menu.Item>
               </Container>
             </Menu>
           </Segment>

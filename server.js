@@ -11,6 +11,6 @@ const handler = routes.getRequestHandler(app);
 app.prepare().then(() => {
   createServer(handler).listen(3000, (err) => {
     if (err) throw err;
-    console.log("rady on localhost:3000");
+    console.log("ready on localhost:3000");
   });
 });

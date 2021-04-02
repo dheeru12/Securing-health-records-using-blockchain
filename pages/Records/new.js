@@ -135,6 +135,7 @@ class newRecord extends Component {
               onChange={(event, { value }) => {
                 this.setState({ name: value });
               }}
+              required
             />
             <Form.Input
               label="age"
@@ -142,6 +143,10 @@ class newRecord extends Component {
               onChange={(e, { value }) => {
                 this.setState({ age: value });
               }}
+              required
+              type="number"
+              min="0"
+              max="100"
             />
             <Form.Select
               label="gender"
@@ -150,27 +155,34 @@ class newRecord extends Component {
               onChange={(event, { value }) => {
                 this.setState({ gender: value });
               }}
+              required
             />
           </Form.Group>
           <Form.Group widths="equal">
             <Form.Input
               label="height"
-              placeholder="height"
+              placeholder="height(cm)"
               onChange={(event, { value }) => {
                 this.setState({ height: value });
               }}
+              required
+              min="0"
+              max="200"
             />
             <Form.Input
               label="weight"
-              placeholder="weight"
+              placeholder="weight(kg)"
               onChange={(e, { value }) => {
                 this.setState({ weight: value });
               }}
+              required
             />
             <Form.Input
               label="Profile Image"
               type="file"
               onChange={this.captureFileImage}
+              required
+              accept="image/png,image/jpeg"
             />
           </Form.Group>
           <Form.Field>
